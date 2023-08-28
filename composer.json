@@ -23,8 +23,8 @@
         }
     },
     "require": {
-        "php": ">=8.0.0",
-        "mako/framework": "9.2.*",
+        "php": ">=8.1.0",
+        "mako/framework": "dev-master",
         "makopro/blade": "*",
         "makopro/helpers": "*"
     },
