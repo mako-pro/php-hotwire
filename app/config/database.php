@@ -9,7 +9,7 @@ return
 	 *
 	 * Default configuration to use.
 	 */
-	'default' => 'test',
+	'default' => 'mysql',
 
 	/*
 	 * ---------------------------------------------------------
@@ -29,11 +29,11 @@ return
 	 */
 	'configurations' =>
 	[
-		'test' =>
+		'mysql' =>
 		[
-			'dsn'         => 'mysql:dbname=test;host=localhost;port=3306',
-			'username'    => 'username',
-			'password'    => 'password',
+			'dsn'         => 'mysql:dbname=mako_hotwired;host=localhost;port=3306',
+			'username'    => 'root',
+			'password'    => '',
 			'persistent'  => false,
 			'log_queries' => false,
 			'reconnect'   => false,
