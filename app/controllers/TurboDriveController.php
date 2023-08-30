@@ -20,6 +20,16 @@ class TurboDriveController extends Controller
 	}
 
 	/**
+	 * Task list page
+	 * @return string
+	 */
+	public function list(): string
+	{
+		$tasks = Task::orderBy('id', 'desc')->all();
+		return $this->blade->render('turbo-drive.list-page', compact('tasks'));
+	}
+
+	/**
 	 * Create a new task
 	 * @return mixed
 	 */
@@ -36,7 +46,7 @@ class TurboDriveController extends Controller
 				$task->due_date = $this->dateFormat($post->get('due_date'));
 				$task->save();
 
-				return $this->redirectResponse('turbo-drive.index');
+				return $this->redirectResponse('turbo-drive.list');
 			}
 		}
 

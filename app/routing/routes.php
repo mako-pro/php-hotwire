@@ -10,5 +10,6 @@ $routes->get('/', [WelcomeController::class, 'index'], 'index');
 
 $routes->group(['prefix' => 'turbo-drive', 'patterns' => ['id' => '[0-9]+']], function($routes) {
     $routes->get('/', [TurboDriveController::class, 'index'], 'turbo-drive.index');
+    $routes->get('/list', [TurboDriveController::class, 'list'], 'turbo-drive.list');
     $routes->register(['GET', 'POST'], '/create', [TurboDriveController::class, 'create'], 'turbo-drive.create');
 });

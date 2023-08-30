@@ -11,6 +11,7 @@
 </head>
 <body>
     <main>
+        @include('turbo-drive.navbar')
         @yield('content')
     </main>
 </body>
