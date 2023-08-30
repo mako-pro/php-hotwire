@@ -48,6 +48,8 @@ class TurboDriveController extends Controller
 				$task->due_date = $this->dateFormat($post->get('due_date'));
 				$task->save();
 
+				$message = 'Task created successfully';
+				$this->session->putFlash('success', $message);
 				return $this->redirectResponse('turbo-drive.list');
 			}
 		}
