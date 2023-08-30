@@ -100,7 +100,7 @@ return
 			mako\application\services\HTTPService::class,
 			mako\application\services\LoggerService::class,
 			//mako\application\services\ViewFactoryService::class,
-			//mako\application\services\SessionService::class,
+			mako\application\services\SessionService::class,
 			mako\application\services\DatabaseService::class,
 			//mako\application\services\RedisService::class,
 			//mako\application\services\I18nService::class,
