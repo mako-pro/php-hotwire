@@ -2,8 +2,7 @@
     "name": "mako/app",
     "description": "Mako Framework",
     "keywords": [
-        "mako",
-        "framework"
+        "php", "mako", "framework", "hotwired", "hotwire", "turbo", "turbo-drive", "turbo-frame", "turbo-stream", "stimulus"
     ],
     "homepage": "http://makoframework.com",
     "license": "BSD-3-Clause",
