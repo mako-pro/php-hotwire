@@ -25,6 +25,7 @@ class TurboDriveController extends Controller
 	 */
 	public function list(): string
 	{
+		sleep(1);
 		$tasks = Task::orderBy('id', 'desc')->all();
 		return $this->blade->render('turbo-drive.list-page', compact('tasks'));
 	}
@@ -35,6 +36,7 @@ class TurboDriveController extends Controller
 	 */
 	public function create(): Redirect|string
 	{
+		sleep(1);
 		if ($this->request->getMethod() == 'POST') {
 			$post = $this->request->getPost();
 
