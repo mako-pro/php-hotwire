@@ -46,4 +46,32 @@ class BaseController extends Controller
 		return $errors;
 	}
 
+	/**
+	 * Render the blade view
+	 * @param  mixed   $view
+	 * @param  array   $data
+	 * @param  string  $frame
+	 * @return string
+	 */
+	protected function view(?string $view, $data=[], $frame=''): string
+	{
+		if (! empty($frame)) {
+			$data['view'] = $view;
+			$data['frame'] = $frame;
+			return $this->blade->render('common.turbo-frame', $data);
+		}
+
+		return $this->blade->render($view, $data);
+	}
+
+	/**
+	 * Returns the target frame the client expects
+	 * @return string|null
+	 */
+	protected function turboFrame(): string|null
+	{
+		return $this->request->getHeaders()
+			->get('Turbo-Frame');
+	}
+
 }
