@@ -2,7 +2,6 @@
 
 namespace app\controllers;
 
-use mako\http\request\Parameters;
 use mako\http\response\senders\Redirect;
 use mako\http\exceptions\NotFoundException;
 use app\controllers\BaseController;
@@ -16,7 +15,7 @@ class TurboFrameController extends BaseController
 	 */
 	public function index(): string
 	{
-		return $this->blade->render('turbo-frame.index');
+		return $this->view('turbo-frame.index');
 	}
 
 	/**
@@ -26,7 +25,7 @@ class TurboFrameController extends BaseController
 	public function list(): string
 	{
 		$tasks = Task::orderBy('id', 'desc')->all();
-		return $this->blade->render('turbo-frame.list-page', compact('tasks'));
+		return $this->view('turbo-frame.list-page', compact('tasks'));
 	}
 
 	/**
@@ -36,7 +35,7 @@ class TurboFrameController extends BaseController
 	public function create(): Redirect|string
 	{
 		if ($this->request->getMethod() == 'GET') {
-			return $this->blade->render('turbo-frame.create-page');
+			return $this->view('turbo-frame.create-page');
 		}
 
 		$post = $this->request->getPost();
@@ -44,7 +43,7 @@ class TurboFrameController extends BaseController
 		// Validate post data
 		if ($errors = $this->validate($post)) {
 			$this->response->setStatus(422);
-			return $this->blade->render('turbo-frame.create-page', [
+			return $this->view('turbo-frame.create-page', [
 				'form'   => $post->all(),
 				'errors' => $errors
 			]);
@@ -56,15 +55,15 @@ class TurboFrameController extends BaseController
 		$task->due_date = $this->dateFormat($post->get('due_date'));
 		$task->save();
 
+		$success = 'Task created successfully';
+
 		// If the request comes within Turbo Frame
-		if ($this->request->getHeaders()->get('Turbo-Frame')) {
-			return '<turbo-frame id="task-create">'.
-					    'Task created successfully!'.
-                    '</turbo-frame>';
+		if ($frame = $this->turboFrame()) {
+			$messages = ['success' => $success];
+			return $this->view('turbo-frame.messages', compact('messages'), $frame);
 		}
 
-		// Otherwise - normal HTTP response
-        $this->session->putFlash('success', 'Task created successfully');
+        $this->session->putFlash('success', $success);
 		return $this->redirectResponse('turbo-frame.detail', ['id' => $task->id]);
 	}
 
@@ -79,7 +78,7 @@ class TurboFrameController extends BaseController
 			$task = Task::getOrThrow($id, exception: NotFoundException::class);
 			$form = $task->toArray();
 			$form['due_date'] = $task->due_date->format('Y-m-d');
-			return $this->blade->render('turbo-frame.update-page', compact('form'));
+			return $this->view('turbo-frame.update-page', compact('form'));
 		}
 
 		$post = $this->request->getPost();
@@ -87,7 +86,7 @@ class TurboFrameController extends BaseController
 		// Validate post data
 		if ($errors = $this->validate($post)) {
 			$this->response->setStatus(422);
-			return $this->blade->render('turbo-frame.update-page', [
+			return $this->view('turbo-frame.update-page', [
 				'form'   => $post->all(),
 				'errors' => $errors
 			]);
@@ -112,7 +111,7 @@ class TurboFrameController extends BaseController
 		if ($this->request->getMethod() == 'GET') {
 			$task = Task::getOrThrow($id, exception: NotFoundException::class);
 			$form = $task->toArray();
-			return $this->blade->render('turbo-frame.delete-page', compact('form'));
+			return $this->view('turbo-frame.delete-page', compact('form'));
 		}
 
 		$token = $this->request->getPost()->get('_token');
@@ -138,7 +137,7 @@ class TurboFrameController extends BaseController
 	public function detail(int $id): string
 	{
 		$task = Task::getOrThrow($id, exception: NotFoundException::class);
-		return $this->blade->render('turbo-frame.detail-page', compact('task'));
+		return $this->view('turbo-frame.detail-page', compact('task'));
 	}
 
 }
