@@ -56,6 +56,14 @@ class TurboFrameController extends BaseController
 		$task->due_date = $this->dateFormat($post->get('due_date'));
 		$task->save();
 
+		// If the request comes within Turbo Frame
+		if ($this->request->getHeaders()->get('Turbo-Frame')) {
+			return '<turbo-frame id="task-create">'.
+					    'Task created successfully!'.
+                    '</turbo-frame>';
+		}
+
+		// Otherwise - normal HTTP response
         $this->session->putFlash('success', 'Task created successfully');
 		return $this->redirectResponse('turbo-frame.detail', ['id' => $task->id]);
 	}
