@@ -25,7 +25,6 @@ class TurboDriveController extends Controller
 	 */
 	public function list(): string
 	{
-		sleep(1);
 		$tasks = Task::orderBy('id', 'desc')->all();
 		return $this->blade->render('turbo-drive.list-page', compact('tasks'));
 	}
@@ -36,12 +35,12 @@ class TurboDriveController extends Controller
 	 */
 	public function create(): Redirect|string
 	{
-		sleep(1);
+
 		if ($this->request->getMethod() == 'POST') {
 			$post = $this->request->getPost();
 
 			// If post data is valid
-			if (! $this->validate($post)) {
+			if (! $errors = $this->validate($post)) {
 				// Insert new task
 				$task = new Task;
 				$task->title = $post->get('title');
@@ -51,6 +50,12 @@ class TurboDriveController extends Controller
 				$message = 'Task created successfully';
 				$this->session->putFlash('success', $message);
 				return $this->redirectResponse('turbo-drive.list');
+			} else {
+				$this->response->setStatus(422);
+				return $this->blade->render('turbo-drive.create-page', [
+					'form'   => $post->all(),
+					'errors' => $errors
+				]);
 			}
 		}
 
