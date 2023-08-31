@@ -97,7 +97,11 @@ class TurboFrameController extends BaseController
 		$task->due_date = $this->dateFormat($post->get('due_date'));
 		$task->save();
 
-		$this->session->putFlash('success', 'Task update successfully');
+		// If the request comes without Turbo Frame
+		if (! $this->turboFrame()) {
+			$this->session->putFlash('success', 'Task update successfully');
+		}
+
 		return $this->redirectResponse('turbo-frame.detail', ['id' => $task->id]);
 	}
 
@@ -124,6 +128,11 @@ class TurboFrameController extends BaseController
 
 		$task = Task::getOrThrow($id);
 		$task->delete();
+
+		// If the request comes within Turbo Frame
+		if ($frame = $this->turboFrame()) {
+			return $this->view(null, ['text' => 'Deleted...'], $frame);
+		}
 
 		$this->session->putFlash('success', 'Task deleted successfully');
 		return $this->redirectResponse('turbo-frame.list');

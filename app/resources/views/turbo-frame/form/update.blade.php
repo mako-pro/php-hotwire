@@ -29,6 +29,10 @@
         <input type="hidden" name="id" value="{{ $form['id'] }}">
         <input type="hidden" name="_token" value="{{ token() }}">
         <button type="submit" class="btn-green mt-6 block" value="Submit">Submit</button>
-        <a href="{{ route('turbo-frame.list') }}" class="btn-red ml-2">Cancel</a>
+        @if (turbo_frame())
+            <a href="{{ route('turbo-frame.detail', ['id' => $form['id']]) }}" class="btn-red ml-2">Cancel</a>
+        @else
+            <a href="{{ route('turbo-frame.list') }}" class="btn-red ml-2">Cancel</a>
+        @endif
     </div>
 </form>
