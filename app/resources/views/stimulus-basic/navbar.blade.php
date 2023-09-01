@@ -9,5 +9,11 @@
         <a href="{{ route('stimulus-basic.load') }}" class="inline-block mt-0 text-teal-200 hover:text-white mr-4">
             Turbo Frame
         </a>
+        <a href="{{ route('stimulus-basic.list') }}" class="inline-block mt-0 text-teal-200 hover:text-white mr-4">
+            List
+        </a>
+        <a href="{{ route('stimulus-basic.create') }}" class="inline-block mt-0 text-teal-200 hover:text-white mr-4">
+            Create
+        </a>
     </div>
 </nav>

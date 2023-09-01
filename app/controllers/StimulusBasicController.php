@@ -33,7 +33,48 @@ class StimulusBasicController extends BaseController
 	 */
 	public function load(): string
 	{
-		return $this->blade->render('stimulus-basic.load');
+		return $this->view('stimulus-basic.load');
+	}
+
+	/**
+	 * Task list page
+	 * @return string
+	 */
+	public function list(): string
+	{
+		$tasks = Task::orderBy('id', 'desc')->all();
+		return $this->view('stimulus-basic.list-page', compact('tasks'));
+	}
+
+	/**
+	 * Create a new task
+	 * @return mixed
+	 */
+	public function create(): Redirect|string
+	{
+		if ($this->request->getMethod() == 'GET') {
+			return $this->view('stimulus-basic.create-page');
+		}
+
+		$post = $this->request->getPost();
+
+		// Validate post data
+		if ($errors = $this->validate($post)) {
+			$this->response->setStatus(422);
+			return $this->view('stimulus-basic.create-page', [
+				'form'   => $post->all(),
+				'errors' => $errors
+			]);
+		}
+
+		// Insert new task
+		$task = new Task;
+		$task->title = $post->get('title');
+		$task->due_date = $this->dateFormat($post->get('due_date'));
+		$task->save();
+
+        $this->session->putFlash('success', 'Task created successfully');
+		return $this->redirectResponse('stimulus-basic.list');
 	}
 
 }

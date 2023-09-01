@@ -29,4 +29,6 @@ $routes->group(['prefix' => 'stimulus-basic'], function($routes) {
     $routes->get('/', [StimulusBasicController::class, 'index'], 'stimulus-basic.index');
     $routes->get('/counter', [StimulusBasicController::class, 'counter'], 'stimulus-basic.counter');
     $routes->get('/load', [StimulusBasicController::class, 'load'], 'stimulus-basic.load');
+    $routes->get('/list', [StimulusBasicController::class, 'list'], 'stimulus-basic.list');
+    $routes->register(['GET', 'POST'], '/create', [StimulusBasicController::class, 'create'], 'stimulus-basic.create');
 });
