@@ -6,5 +6,8 @@
         <a href="{{ route('stimulus-basic.counter') }}" class="inline-block mt-0 text-teal-200 hover:text-white mr-4">
             Counter
         </a>
+        <a href="{{ route('stimulus-basic.load') }}" class="inline-block mt-0 text-teal-200 hover:text-white mr-4">
+            Turbo Frame
+        </a>
     </div>
 </nav>

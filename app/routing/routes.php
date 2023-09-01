@@ -28,4 +28,5 @@ $routes->group(['prefix' => 'turbo-frame', 'patterns' => ['id' => '[0-9]+']], fu
 $routes->group(['prefix' => 'stimulus-basic'], function($routes) {
     $routes->get('/', [StimulusBasicController::class, 'index'], 'stimulus-basic.index');
     $routes->get('/counter', [StimulusBasicController::class, 'counter'], 'stimulus-basic.counter');
+    $routes->get('/load', [StimulusBasicController::class, 'load'], 'stimulus-basic.load');
 });

@@ -27,4 +27,13 @@ class StimulusBasicController extends BaseController
 		return $this->view('stimulus-basic.counter');
 	}
 
+	/**
+	 * Load Turbo Frame
+	 * @return string
+	 */
+	public function load(): string
+	{
+		return $this->blade->render('stimulus-basic.load');
+	}
+
 }
