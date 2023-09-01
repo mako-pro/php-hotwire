@@ -11,7 +11,9 @@ module.exports = {
         './app/resources/**/*.{html,php,js}',
     ],
     theme: {
-        extend: {},
+        extend: {
+            opacity: ['disabled'],
+        },
     },
     plugins: [
         require('@tailwindcss/forms'),

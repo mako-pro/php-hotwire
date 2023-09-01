@@ -38,3 +38,18 @@ body {
     @apply hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75;
     @apply disabled:opacity-75;
 }
+
+/* Stimulus Basic */
+
+form[data-controller="form"] button[data-form-target="submit"] svg {
+	 @apply hidden;
+}
+
+ form[data-controller="form"][data-submitting] button[data-form-target="submit"] {
+	 @apply cursor-not-allowed;
+}
+
+ form[data-controller="form"][data-submitting] button[data-form-target="submit"] svg {
+	 @apply inline-block;
+}
+

@@ -56,6 +56,8 @@ class StimulusBasicController extends BaseController
 			return $this->view('stimulus-basic.create-page');
 		}
 
+		sleep(2);
+
 		$post = $this->request->getPost();
 
 		// Validate post data

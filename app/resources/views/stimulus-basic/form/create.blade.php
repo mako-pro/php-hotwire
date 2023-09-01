@@ -1,4 +1,7 @@
-<form method="post" action="{{ route('stimulus-basic.create') }}">
+<form method="post" action="{{ route('stimulus-basic.create') }}"
+    data-controller="form"
+    data-action="turbo:submit-start->form#submitStart turbo:submit-end->form#submitEnd"
+>
     <div class="mb-4 mt-2">
         <div class="grid grid-cols-1 gap-6">
             <label class="block">
@@ -30,6 +33,7 @@
         </div>
         <input type="hidden" name="_token" value="{{ token() }}">
         <button data-form-target="submit" type="submit" class="btn-green mt-6 block" value="Submit">
+            @include('common.spinner')
             Submit
         </button>
     </div>
