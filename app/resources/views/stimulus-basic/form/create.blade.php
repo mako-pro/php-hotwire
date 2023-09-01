@@ -17,6 +17,8 @@
                 <span class="text-gray-600">Due date *</span>
                 <input class="mt-1 block w-full rounded-md bg-gray-100 focus:border-gray-500 focus:bg-white focus:ring-0
                     @if ($errors['due_date'] ?? '') border-red-500 @else border-transparent @endif"
+                    data-controller="flatpickr"
+                    data-flatpickr-enable-time="false"
                     type="text"
                     name="due_date"
                     value="{{ $form['due_date'] }}"

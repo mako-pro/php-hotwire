@@ -9,6 +9,7 @@
 </head>
 <body>
     <main>
+        @include('stimulus-basic.messages')
         @include('stimulus-basic.navbar')
         @yield('content')
     </main>
