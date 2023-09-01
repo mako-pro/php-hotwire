@@ -3,6 +3,7 @@
 use app\controllers\WelcomeController;
 use app\controllers\TurboDriveController;
 use app\controllers\TurboFrameController;
+use app\controllers\StimulusBasicController;
 
 /** @var \mako\http\routing\Routes     $routes    */
 /** @var \mako\application\Application $app       */
@@ -22,4 +23,9 @@ $routes->group(['prefix' => 'turbo-frame', 'patterns' => ['id' => '[0-9]+']], fu
     $routes->register(['GET', 'POST'], '/create', [TurboFrameController::class, 'create'], 'turbo-frame.create');
     $routes->register(['GET', 'POST'], '/{id}/update', [TurboFrameController::class, 'update'], 'turbo-frame.update');
     $routes->register(['GET', 'POST'], '/{id}/delete', [TurboFrameController::class, 'delete'], 'turbo-frame.delete');
+});
+
+$routes->group(['prefix' => 'stimulus-basic'], function($routes) {
+    $routes->get('/', [StimulusBasicController::class, 'index'], 'stimulus-basic.index');
+    $routes->get('/counter', [StimulusBasicController::class, 'counter'], 'stimulus-basic.counter');
 });

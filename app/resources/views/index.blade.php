@@ -10,6 +10,7 @@
             <p class="flex justify-center">
                 <a class="btn-blue mr-3" href="{{ route('turbo-drive.index') }}" role="button">Turbo Drive</a>
                 <a class="btn-blue mr-3" href="{{ route('turbo-frame.index') }}" role="button">Turbo Frame</a>
+                <a class="btn-blue mr-3" href="{{ route('stimulus-basic.index') }}" role="button">Stimulus Basic</a>
             </p>
         </div>
     </div>
