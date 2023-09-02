@@ -12,6 +12,7 @@
         data-turbo-temporary="true"
         data-controller="alert"
         data-alert-remove-delay-value="0"
+        data-alert-dismiss-after-value="2000"
         role="alert"
     >
         <span class="inline-block align-middle mr-8">
