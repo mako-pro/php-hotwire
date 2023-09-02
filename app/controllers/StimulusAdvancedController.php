@@ -55,15 +55,15 @@ class StimulusAdvancedController extends BaseController
 		$task->due_date = $this->dateFormat($post->get('due_date'));
 		$task->save();
 
-		$success = 'Task created successfully.';
+		$this->session->putFlash('success', 'Task created successfully.');
 
-		// If the request comes within Turbo Frame
+		// Returns the redirect message with pause before redirecting
 		if ($frame = $this->turboFrame()) {
-			$messages = ['success' => $success];
-			return $this->view('stimulus-advanced.messages', compact('messages'), $frame);
+			$this->response->getHeaders()->add('X-Redirect',
+				$this->urlBuilder->toRoute('stimulus-advanced.detail', ['id' => $task->id]));
+			return $this->view(null, ['text' => 'Redirecting...'], $frame);
 		}
 
-		$this->session->putFlash('success', $success);
 		return $this->redirectResponse('stimulus-advanced.detail', ['id' => $task->id]);
 	}
 

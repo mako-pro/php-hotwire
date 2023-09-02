@@ -7,7 +7,7 @@
         <h1 class="text-3xl sm:text-4xl mb-6">Modal Demo</h1>
         <div class="relative z-10"
             data-controller="modal"
-            data-action="keydown.esc->modal#close"
+            data-action="keydown.esc->modal#close turbo:submit-end->modal#closeOnSuccessSubmit"
             data-modal-url-value="{{ route('stimulus-advanced.create') }}"
             tabindex="-1"
         >
@@ -29,7 +29,7 @@
                     <!-- Modal Card -->
                     <div class="m-1 bg-white rounded shadow">
                         <div class="p-8">
-                            <turbo-frame id="modal-content" src="{{ route('stimulus-advanced.create') }}" loading="lazy">
+                            <turbo-frame id="modal-content" data-modal-target="modalContent" loading="lazy">
                             </turbo-frame>
                         </div>
                     </div>
