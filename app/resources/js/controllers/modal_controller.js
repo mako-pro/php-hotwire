@@ -17,6 +17,7 @@ export default class extends Modal {
     };
 
     open(e) {
+        e.preventDefault();
         this.loadContent();
         super.open(e);
     }
