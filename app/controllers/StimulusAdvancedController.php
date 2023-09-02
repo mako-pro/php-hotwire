@@ -133,4 +133,13 @@ class StimulusAdvancedController extends BaseController
 		return $this->view('stimulus-advanced.detail-page', compact('task'));
 	}
 
+	/**
+	 * Modal window demo page
+	 * @return string
+	 */
+	public function modal(): string
+	{
+		return $this->view('stimulus-advanced.modal-demo');
+	}
+
 }

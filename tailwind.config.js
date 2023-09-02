@@ -9,6 +9,7 @@
 module.exports = {
     content: [
         './app/resources/**/*.{html,php,js}',
+        './node_modules/tailwindcss-stimulus-components/dist/*.js',
     ],
     theme: {
         extend: {

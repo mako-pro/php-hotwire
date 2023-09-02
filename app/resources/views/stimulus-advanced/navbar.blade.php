@@ -9,5 +9,8 @@
         <a href="{{ route('stimulus-advanced.create') }}" class="inline-block mt-0 text-teal-200 hover:text-white mr-4">
             Create
         </a>
+        <a href="{{ route('stimulus-advanced.modal') }}" class="inline-block mt-0 text-teal-200 hover:text-white mr-4">
+            Modal Demo
+        </a>
     </div>
 </nav>

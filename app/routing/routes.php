@@ -41,4 +41,5 @@ $routes->group(['prefix' => 'stimulus-advanced', 'patterns' => ['id' => '[0-9]+'
     $routes->register(['GET', 'POST'], '/create', [StimulusAdvancedController::class, 'create'], 'stimulus-advanced.create');
     $routes->register(['GET', 'POST'], '/{id}/update', [StimulusAdvancedController::class, 'update'], 'stimulus-advanced.update');
     $routes->register(['GET', 'POST'], '/{id}/delete', [StimulusAdvancedController::class, 'delete'], 'stimulus-advanced.delete');
+    $routes->get('/modal', [StimulusAdvancedController::class, 'modal'], 'stimulus-advanced.modal');
 });
