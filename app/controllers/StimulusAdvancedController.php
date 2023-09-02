@@ -56,7 +56,14 @@ class StimulusAdvancedController extends BaseController
 		$task->save();
 
 		$success = 'Task created successfully.';
-        $this->session->putFlash('success', $success);
+
+		// If the request comes within Turbo Frame
+		if ($frame = $this->turboFrame()) {
+			$messages = ['success' => $success];
+			return $this->view('stimulus-advanced.messages', compact('messages'), $frame);
+		}
+
+		$this->session->putFlash('success', $success);
 		return $this->redirectResponse('stimulus-advanced.detail', ['id' => $task->id]);
 	}
 

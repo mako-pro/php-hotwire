@@ -29,7 +29,7 @@
                     <!-- Modal Card -->
                     <div class="m-1 bg-white rounded shadow">
                         <div class="p-8">
-                            <turbo-frame id="modal-content" src="{{ route('stimulus-advanced.create') }}">
+                            <turbo-frame id="modal-content" src="{{ route('stimulus-advanced.create') }}" loading="lazy">
                             </turbo-frame>
                         </div>
                     </div>
