@@ -5,6 +5,12 @@
 @section('content')
     <div class="w-full max-w-3xl mx-auto px-4">
         <h1 class="text-3xl sm:text-4xl mb-6">Create Task</h1>
-        @include('stimulus-advanced.form.create')
+        @if ($frame = turbo_frame())
+            <turbo-frame id="{{ $frame }}">
+                @include('stimulus-advanced.form.create')
+            </turbo-frame>
+        @else
+            @include('stimulus-advanced.form.create')
+        @endif
     </div>
 @stop

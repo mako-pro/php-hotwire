@@ -29,11 +29,8 @@
                     <!-- Modal Card -->
                     <div class="m-1 bg-white rounded shadow">
                         <div class="p-8">
-                            <h2 class="text-xl mb-4">Large Modal Content</h2>
-                            <p class="mb-4">This is an example modal dialog box.</p>
-                            <div class="flex justify-end items-center flex-wrap mt-6">
-                                <button class="btn-blue" data-action="click->modal#close">Close</button>
-                            </div>
+                            <turbo-frame id="modal-content" src="{{ route('stimulus-advanced.create') }}">
+                            </turbo-frame>
                         </div>
                     </div>
                 </div>
