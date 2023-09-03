@@ -12,6 +12,7 @@
                 <a class="btn-blue mr-3" href="{{ route('turbo-frame.index') }}" role="button">Turbo Frame</a>
                 <a class="btn-blue mr-3" href="{{ route('stimulus-basic.index') }}" role="button">Stimulus Basic</a>
                 <a class="btn-blue mr-3" href="{{ route('stimulus-advanced.index') }}" role="button">Stimulus Advanced</a>
+                <a class="btn-blue" href="{{ route('turbo-stream.index') }}" role="button">Turbo Stream</a>
             </p>
         </div>
     </div>

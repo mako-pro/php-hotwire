@@ -5,6 +5,7 @@ use app\controllers\TurboDriveController;
 use app\controllers\TurboFrameController;
 use app\controllers\StimulusBasicController;
 use app\controllers\StimulusAdvancedController;
+use app\controllers\TurboStreamController;
 
 /** @var \mako\http\routing\Routes     $routes    */
 /** @var \mako\application\Application $app       */
@@ -42,4 +43,13 @@ $routes->group(['prefix' => 'stimulus-advanced', 'patterns' => ['id' => '[0-9]+'
     $routes->register(['GET', 'POST'], '/{id}/update', [StimulusAdvancedController::class, 'update'], 'stimulus-advanced.update');
     $routes->register(['GET', 'POST'], '/{id}/delete', [StimulusAdvancedController::class, 'delete'], 'stimulus-advanced.delete');
     $routes->get('/modal', [StimulusAdvancedController::class, 'modal'], 'stimulus-advanced.modal');
+});
+
+$routes->group(['prefix' => 'turbo-stream', 'patterns' => ['id' => '[0-9]+']], function($routes) {
+    $routes->get('/', [TurboStreamController::class, 'index'], 'turbo-stream.index');
+    $routes->get('/list', [TurboStreamController::class, 'list'], 'turbo-stream.list');
+    $routes->get('/{id}', [TurboStreamController::class, 'detail'], 'turbo-stream.detail');
+    $routes->register(['GET', 'POST'], '/create', [TurboStreamController::class, 'create'], 'turbo-stream.create');
+    $routes->register(['GET', 'POST'], '/{id}/update', [TurboStreamController::class, 'update'], 'turbo-stream.update');
+    $routes->register(['GET', 'POST'], '/{id}/delete', [TurboStreamController::class, 'delete'], 'turbo-stream.delete');
 });
