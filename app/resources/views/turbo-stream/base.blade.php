@@ -11,7 +11,9 @@
 </head>
 <body>
     <main>
-        @include('turbo-stream.messages')
+        <div class="w-full" id="messages">
+            @include('turbo-stream.messages')
+        </div>
         @include('turbo-stream.navbar')
         @yield('content')
     </main>

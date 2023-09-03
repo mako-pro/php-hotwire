@@ -74,4 +74,56 @@ class BaseController extends Controller
 			->get('Turbo-Frame');
 	}
 
+	/**
+	 * Returns true if the client accepts turbo stream reponses
+	 * @return bool
+	 */
+	protected function canTurboStream(): bool
+	{
+		$headers = $this->request->getHeaders();
+		$contentTypes = $headers->getAcceptableContentTypes();
+
+		return in_array('text/vnd.turbo-stream.html', $contentTypes);
+	}
+
+	/**
+	 * Turbo stream response
+	 * @param  array  $streams  Separate turbo stream contexts
+	 * @return string
+	 */
+	protected function turboStreamResponse(array $streams): string
+	{
+		// Set the content type as turbo-stream
+		$args = ['Content-Type', 'text/vnd.turbo-stream.html; charset=utf-8'];
+		$this->response->getHeaders()->add(...$args);
+
+		return $this->blade->render('common.turbo-stream', compact('streams'));
+	}
+
+	/**
+	 * Turbo stream context
+	 * @param  string       $action    Action name
+	 * @param  string       $target    Target name
+	 * @param  string|null  $template  Template name
+	 * @param  mixed        $data      Stream content | Template data
+	 * @return array
+	 */
+	protected function turboStream(
+		string $action,
+		string $target,
+		?string $template='',
+		mixed $data=[]): array
+	{
+		// Trigger for single|multiple targets
+		$sfx = strpos($target, '.') === 0 ? 's' : '';
+		$targets = 'target'. $sfx .'="'. $target .'"';
+
+		return [
+			'action'   => $action,
+			'targets'  => $targets,
+			'template' => $template,
+			'data'     => $data,
+		];
+	}
+
 }

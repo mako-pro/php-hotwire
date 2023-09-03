@@ -58,9 +58,12 @@ class TurboStreamController extends BaseController
 		$success = 'Task created successfully';
 
 		// If the request come from Turbo Frame
-		if ($frame = $this->turboFrame()) {
+		if ($this->turboFrame() && $this->canTurboStream()) {
 			$messages = ['success' => $success];
-			return $this->view('turbo-stream.messages', compact('messages'), $frame);
+			return $this->turboStreamResponse([
+				$this->turboStream('append', 'messages', 'turbo-stream.messages', compact('messages')),
+				$this->turboStream('update', 'task-create', 'turbo-stream.form.create'),
+			]);
 		}
 
 		$this->session->putFlash('success', $success);
