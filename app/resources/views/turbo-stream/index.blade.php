@@ -9,6 +9,10 @@
             <turbo-frame id="task-create" src="{{ route('turbo-stream.create') }}">
                 Loading...
             </turbo-frame>
+            <h2 class="flex justify-between rounded text-md bg-amber-100 py-1 px-4 my-4">
+                <span>Task list</span>
+                <span class="text-sm mt-1">Total count: <span id="task-count">{{ $count }}</span></span>
+            </h2>
             <turbo-frame id="task-list" src="{{ route('turbo-stream.list') }}">
                 Loading...
             </turbo-frame>

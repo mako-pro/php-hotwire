@@ -15,7 +15,8 @@ class TurboStreamController extends BaseController
 	 */
 	public function index(): string
 	{
-		return $this->view('turbo-stream.index');
+		$count = Task::count();
+		return $this->view('turbo-stream.index', compact('count'));
 	}
 
 	/**
@@ -59,12 +60,14 @@ class TurboStreamController extends BaseController
 
 		// If the request come from Turbo Frame
 		if ($this->turboFrame() && $this->canTurboStream()) {
+			$count = Task::count();
 			$task->streamingFlag = true;
 			$messages = ['success' => $success];
 			return $this->turboStreamResponse([
 				$this->turboStream('append', 'messages', 'turbo-stream.messages', compact('messages')),
 				$this->turboStream('update', 'task-create', 'turbo-stream.form.create'),
 				$this->turboStream('prepend', 'task-list-ul', 'turbo-stream.task-detail', compact('task')),
+				$this->turboStream('update', 'task-count', null, $count),
 			]);
 		}
 
@@ -151,6 +154,7 @@ class TurboStreamController extends BaseController
 			$deleted = "task-detail-li-{$task->id}";
 			return $this->turboStreamResponse([
 				$this->turboStream('append', 'messages', 'turbo-stream.messages', compact('messages')),
+				$this->turboStream('update', 'task-count', null, $count),
 				$this->turboStream('remove', $deleted),
 			]);
 		}
