@@ -9,5 +9,8 @@
         <a href="{{ route('turbo-stream.create') }}" class="inline-block mt-0 text-teal-200 hover:text-white mr-4">
             Create
         </a>
+        <a href="{{ route('turbo-stream.index') }}" class="inline-block mt-0 text-teal-200 hover:text-white mr-4">
+            Turbo Stream Index
+        </a>
     </div>
 </nav>

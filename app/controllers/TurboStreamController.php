@@ -11,11 +11,11 @@ class TurboStreamController extends BaseController
 {
 	/**
 	 * Index page
-	 * @return Redirect
+	 * @return string
 	 */
-	public function index(): Redirect
+	public function index(): string
 	{
-		return $this->redirectResponse('turbo-stream.list');
+		return $this->view('turbo-stream.index');
 	}
 
 	/**
@@ -55,7 +55,15 @@ class TurboStreamController extends BaseController
 		$task->due_date = $this->dateFormat($post->get('due_date'));
 		$task->save();
 
-        $this->session->putFlash('success', 'Task created successfully');
+		$success = 'Task created successfully';
+
+		// If the request come from Turbo Frame
+		if ($frame = $this->turboFrame()) {
+			$messages = ['success' => $success];
+			return $this->view('turbo-stream.messages', compact('messages'), $frame);
+		}
+
+		$this->session->putFlash('success', $success);
 		return $this->redirectResponse('turbo-stream.detail', ['id' => $task->id]);
 	}
 
