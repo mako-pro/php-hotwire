@@ -100,7 +100,19 @@ class TurboStreamController extends BaseController
 		$task->due_date = $this->dateFormat($post->get('due_date'));
 		$task->save();
 
-		$this->session->putFlash('success', 'Task update successfully');
+		$success = 'Task update successfully';
+
+		// If the request come from Turbo Frame
+		if ($this->turboFrame() && $this->canTurboStream()) {
+			$messages = ['success' => $success];
+			$updated = "task-detail-li-{$task->id}";
+			return $this->turboStreamResponse([
+				$this->turboStream('append', 'messages', 'turbo-stream.messages', compact('messages')),
+				$this->turboStream('update', $updated, 'turbo-stream.task-detail', compact('task')),
+			]);
+		}
+
+		$this->session->putFlash('success', $success);
 		return $this->redirectResponse('turbo-stream.detail', ['id' => $task->id]);
 	}
 
@@ -128,7 +140,25 @@ class TurboStreamController extends BaseController
 		$task = Task::getOrThrow($id);
 		$task->delete();
 
-		$this->session->putFlash('success', 'Task deleted successfully');
+		$success = 'Task deleted successfully';
+
+		/*// Simple Turbo Frame response
+		if ($frame = $this->turboFrame()) {
+			return $this->view(null, ['text' => 'Deleted...'], $frame);
+		}*/
+
+		// If the request come from Turbo Frame
+		if ($this->turboFrame() && $this->canTurboStream()) {
+			$count = Task::count();
+			$messages = ['success' => $success];
+			$deleted = "task-detail-li-{$task->id}";
+			return $this->turboStreamResponse([
+				$this->turboStream('append', 'messages', 'turbo-stream.messages', compact('messages')),
+				$this->turboStream('remove', $deleted),
+			]);
+		}
+
+		$this->session->putFlash('success', $success);
 		return $this->redirectResponse('turbo-stream.list');
 	}
 

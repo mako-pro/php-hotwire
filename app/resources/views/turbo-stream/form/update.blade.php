@@ -37,6 +37,10 @@
             @include('common.spinner')
             Submit
         </button>
-        <a href="{{ route('turbo-stream.list') }}" class="btn-red ml-2">Cancel</a>
+        @if (turbo_frame())
+            <a href="{{ route('turbo-stream.detail', ['id' => $form['id']]) }}" class="btn-red ml-2">Cancel</a>
+        @else
+            <a href="{{ route('turbo-stream.list') }}" class="btn-red ml-2">Cancel</a>
+        @endif
     </div>
 </form>

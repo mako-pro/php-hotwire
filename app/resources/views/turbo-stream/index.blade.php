@@ -9,6 +9,9 @@
             <turbo-frame id="task-create" src="{{ route('turbo-stream.create') }}">
                 Loading...
             </turbo-frame>
+            <turbo-frame id="task-list" src="{{ route('turbo-stream.list') }}">
+                Loading...
+            </turbo-frame>
         </div>
     </div>
 @stop

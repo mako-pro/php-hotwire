@@ -4,5 +4,9 @@
     </div>
     <input type="hidden" name="_token" value="{{ token() }}">
     <button type="submit" class="btn-green mt-2 block" value="Submit">Submit</button>
-    <a href="{{ route('turbo-stream.list') }}" class="btn-red ml-2">Cancel</a>
+    @if (turbo_frame())
+        <a href="{{ route('turbo-stream.detail', ['id' => $form['id']]) }}" class="btn-red ml-2">Cancel</a>
+    @else
+        <a href="{{ route('turbo-stream.list') }}" class="btn-red ml-2">Cancel</a>
+    @endif
 </form>
