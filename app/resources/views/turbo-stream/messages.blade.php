@@ -11,7 +11,7 @@
         @endif"
         data-turbo-temporary="true"
         data-controller="alert"
-        data-alert-dismiss-after-value="2000"
+        data-alert-dismiss-after-value="1000"
         data-alert-remove-delay-value="0"
         role="alert"
     >

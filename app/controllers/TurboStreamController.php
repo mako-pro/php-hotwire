@@ -59,10 +59,12 @@ class TurboStreamController extends BaseController
 
 		// If the request come from Turbo Frame
 		if ($this->turboFrame() && $this->canTurboStream()) {
+			$task->streamingFlag = true;
 			$messages = ['success' => $success];
 			return $this->turboStreamResponse([
 				$this->turboStream('append', 'messages', 'turbo-stream.messages', compact('messages')),
 				$this->turboStream('update', 'task-create', 'turbo-stream.form.create'),
+				$this->turboStream('prepend', 'task-list-ul', 'turbo-stream.task-detail', compact('task')),
 			]);
 		}
 
@@ -141,11 +143,6 @@ class TurboStreamController extends BaseController
 		$task->delete();
 
 		$success = 'Task deleted successfully';
-
-		/*// Simple Turbo Frame response
-		if ($frame = $this->turboFrame()) {
-			return $this->view(null, ['text' => 'Deleted...'], $frame);
-		}*/
 
 		// If the request come from Turbo Frame
 		if ($this->turboFrame() && $this->canTurboStream()) {
