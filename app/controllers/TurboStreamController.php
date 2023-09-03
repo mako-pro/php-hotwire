@@ -67,7 +67,7 @@ class TurboStreamController extends BaseController
 				$this->turboStream('append', 'messages', 'turbo-stream.messages', compact('messages')),
 				$this->turboStream('update', 'task-create', 'turbo-stream.form.create'),
 				$this->turboStream('prepend', 'task-list-ul', 'turbo-stream.task-detail', compact('task')),
-				$this->turboStream('update', 'task-count', null, $count),
+				$this->turboStream('update', '.task-count', null, $count),
 			]);
 		}
 
@@ -154,7 +154,7 @@ class TurboStreamController extends BaseController
 			$deleted = "task-detail-li-{$task->id}";
 			return $this->turboStreamResponse([
 				$this->turboStream('append', 'messages', 'turbo-stream.messages', compact('messages')),
-				$this->turboStream('update', 'task-count', null, $count),
+				$this->turboStream('update', '.task-count', null, $count),
 				$this->turboStream('remove', $deleted),
 			]);
 		}
